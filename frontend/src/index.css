@@ -1,0 +1,276 @@
+:root {
+  color-scheme: light dark;
+  font-family: system-ui, 'Segoe UI', sans-serif;
+  --azul: light-dark(#1a69a4, #7cb7e6);
+  --tinta: light-dark(#14324b, #e3ecf4);
+  --gris: light-dark(#52606d, #a9b6c2);
+  --borde: light-dark(#9aa5b1, #66727e);
+  --error: light-dark(#c62828, #ff8a80);
+  --exito: light-dark(#2e7d32, #81c784);
+  --fondo: light-dark(#f4f7fa, #10161c);
+  --tarjeta: light-dark(#ffffff, #1a2128);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--tinta);
+}
+
+/* Escritorio: panel de marca a la izquierda y formulario a la derecha. */
+.pagina {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+}
+
+.panel-marca {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem clamp(2rem, 5vw, 4.5rem);
+  color: #ffffff;
+  background: linear-gradient(160deg, #1f74b8 0%, #0d4f8c 100%);
+}
+
+/* Formas decorativas del panel: solo fondo, sin contenido. */
+.panel-marca::before,
+.panel-marca::after {
+  content: '';
+  position: absolute;
+  border-radius: 3rem;
+  background: rgb(255 255 255 / 0.08);
+  transform: rotate(45deg);
+}
+
+.panel-marca::before {
+  width: 24rem;
+  height: 24rem;
+  top: -10rem;
+  left: -9rem;
+}
+
+.panel-marca::after {
+  width: 30rem;
+  height: 30rem;
+  bottom: -15rem;
+  right: -11rem;
+}
+
+.marca {
+  position: relative;
+  margin: 0;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.lema {
+  position: relative;
+  margin: 0.25rem 0 0;
+  font-size: 1.35rem;
+  opacity: 0.9;
+}
+
+.columna-formulario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1.5rem 1.5rem;
+  background: var(--tarjeta);
+}
+
+.tarjeta {
+  width: min(28rem, 100%);
+  margin-block: auto;
+}
+
+.pie {
+  margin-top: 2rem;
+  color: var(--gris);
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.25rem;
+}
+
+.subtitulo {
+  margin: 0.25rem 0 1.25rem;
+  color: var(--gris);
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+label {
+  font-weight: 600;
+}
+
+.control {
+  display: flex;
+  gap: 0.5rem;
+}
+
+input {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0.5rem 0.75rem;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+}
+
+input[aria-invalid='true'] {
+  border: 2px solid var(--error);
+}
+
+.ayuda,
+.error {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.ayuda {
+  color: var(--gris);
+}
+
+.error {
+  color: var(--error);
+}
+
+button {
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  font: inherit;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.boton-principal {
+  color: #ffffff;
+  background: var(--azul);
+  border: 1px solid var(--azul);
+}
+
+.boton-secundario {
+  color: var(--tinta);
+  background: transparent;
+  border: 1px solid var(--borde);
+}
+
+button[aria-disabled='true'],
+input:read-only {
+  cursor: progress;
+  opacity: 0.65;
+}
+
+:focus-visible {
+  outline: 3px solid var(--azul);
+  outline-offset: 2px;
+}
+
+.aviso {
+  padding: 0.75rem 1rem;
+  border: 1px solid;
+  border-radius: 8px;
+}
+
+.aviso p {
+  margin: 0;
+}
+
+.aviso-titulo {
+  font-weight: 700;
+}
+
+.aviso-error {
+  color: var(--error);
+  border-color: var(--error);
+}
+
+.aviso-exito {
+  color: var(--exito);
+  border-color: var(--exito);
+}
+
+.bienvenida {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Móvil: la marca pasa a una cabecera y el formulario a una tarjeta que se superpone a ella. */
+@media (max-width: 860px) {
+  .pagina {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+  }
+
+  .panel-marca {
+    justify-content: flex-start;
+    padding: 3rem 1.5rem 6.5rem;
+    border-radius: 0 0 2rem 2rem;
+  }
+
+  .panel-marca::before,
+  .panel-marca::after {
+    border-radius: 50%;
+    transform: none;
+    background: rgb(255 255 255 / 0.1);
+  }
+
+  .panel-marca::before {
+    width: 16rem;
+    height: 16rem;
+    top: -7rem;
+    left: auto;
+    right: -5rem;
+  }
+
+  .panel-marca::after {
+    width: 14rem;
+    height: 14rem;
+    bottom: -6rem;
+    right: -6rem;
+  }
+
+  .columna-formulario {
+    position: relative;
+    margin-top: -4.5rem;
+    padding: 0 1rem 1.5rem;
+    background: transparent;
+  }
+
+  .tarjeta {
+    margin-block: 0;
+    padding: 2rem 1.5rem;
+    background: var(--tarjeta);
+    border-radius: 16px;
+    box-shadow: 0 12px 32px rgb(13 79 140 / 0.14);
+  }
+
+  h1 {
+    font-size: 1.85rem;
+  }
+}

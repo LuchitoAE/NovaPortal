@@ -1,0 +1,27 @@
+# Pruebas rápidas de la API (VS Code con la extensión REST Client, o copiar en Swagger: http://localhost:5300/swagger)
+# Para E-05 y E-04 use un colaborador registrado con psql (ver «Agregar o quitar colaboradores» en el README).
+@api = http://localhost:5300
+
+### E-05 Credenciales correctas → 200 con el nombre del colaborador
+POST {{api}}/api/autenticacion/ingreso
+Content-Type: application/json
+
+{ "correo_colaborador": "nombre.apellido@novatech.com.pe", "contrasena_colaborador": "su-contraseña" }
+
+### E-04 Credenciales incorrectas → 401 con un mensaje que no dice qué dato falló
+POST {{api}}/api/autenticacion/ingreso
+Content-Type: application/json
+
+{ "correo_colaborador": "nombre.apellido@novatech.com.pe", "contrasena_colaborador": "otra" }
+
+### E-02 Formato de correo incorrecto → 400 con el error en correo_colaborador
+POST {{api}}/api/autenticacion/ingreso
+Content-Type: application/json
+
+{ "correo_colaborador": "nombre.apellido", "contrasena_colaborador": "su-contraseña" }
+
+### E-01 Campos vacíos → 400 con un error por campo
+POST {{api}}/api/autenticacion/ingreso
+Content-Type: application/json
+
+{ "correo_colaborador": "", "contrasena_colaborador": "" }

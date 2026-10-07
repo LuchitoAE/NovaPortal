@@ -1,0 +1,13 @@
+# Dependencias y compilados: se regeneran con «pnpm install», «pnpm build» y «dotnet build»
+node_modules/
+dist/
+bin/
+obj/
+
+# Editores y sistema
+.vs/
+.vscode/
+.idea/
+*.user
+*.log
+.DS_Store
